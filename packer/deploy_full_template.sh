@@ -1,5 +1,4 @@
 #!/bin/bash
 
-#packer validate ./ubuntu16.json |
-
+#packer validate -var-file=variables_full.json immutable.json |
 packer build -var-file=variables_full.json immutable.json

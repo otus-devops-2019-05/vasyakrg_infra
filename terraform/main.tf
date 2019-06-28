@@ -12,8 +12,21 @@ provider "google" {
   region  = "${var.region}"
 }
 
+resource "google_compute_project_metadata" "ssh_keys" {
+  metadata {
+    #ssh-keys = "root:${file(var.public_key_path)}"
+
+    ssh-keys = <<EOF
+root:${file(var.public_key_path)}
+appuser1:${file(var.public_key_path)}
+appuser2:${file(var.public_key_path)}
+EOF
+  }
+}
+
 resource "google_compute_instance" "app" {
-  name         = "reddit-app"
+  count        = "${var.count_instance}"
+  name         = "reddit-app-${count.index}"
   machine_type = "g1-small"
   zone         = "${var.zone_instance}"
   tags         = ["reddit-app"]
@@ -25,17 +38,16 @@ resource "google_compute_instance" "app" {
     }
   }
 
+  # depricated
+  # metadata {
+  #   ssh-keys = "appuser:${file(var.public_key_path)}"
+  # }
+
   # add network
   network_interface {
     network       = "default"
     access_config = {}
   }
-
-  # add ssh key
-  metadata {
-    ssh-keys = "root:${file(var.public_key_path)}"
-  }
-
   connection {
     type  = "ssh"
     user  = "root"
@@ -43,13 +55,12 @@ resource "google_compute_instance" "app" {
 
     private_key = "${file(var.private_key_path)}"
   }
-
   # add startup service
   provisioner "file" {
     source      = "files/puma.service"
     destination = "/tmp/puma.service"
   }
-
+  # install app
   provisioner "remote-exec" {
     script = "files/deploy.sh"
   }

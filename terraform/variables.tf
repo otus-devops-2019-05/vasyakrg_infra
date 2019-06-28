@@ -11,6 +11,11 @@ variable "zone_instance" {
   default = "europe-west1-b"
 }
 
+variable "count_instance" {
+  description = "count of instances"
+  default     = "1"
+}
+
 variable public_key_path {
   description = "Path to the public key used for ssh access"
 }

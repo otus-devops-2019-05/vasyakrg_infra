@@ -17,7 +17,7 @@ resource "google_compute_project_metadata" "ssh_keys" {
     #ssh-keys = "root:${file(var.public_key_path)}"
 
     ssh-keys = <<EOF
-root:${file(var.public_key_path)}
+appuser:${file(var.public_key_path)}
 appuser1:${file(var.public_key_path)}
 appuser2:${file(var.public_key_path)}
 EOF
@@ -50,7 +50,7 @@ resource "google_compute_instance" "app" {
   }
   connection {
     type  = "ssh"
-    user  = "root"
+    user  = "appuser"
     agent = false
 
     private_key = "${file(var.private_key_path)}"

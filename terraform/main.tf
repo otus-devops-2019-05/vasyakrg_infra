@@ -25,11 +25,11 @@ EOF
 }
 
 resource "google_compute_instance" "app" {
-  count        = "${var.count_instance}"
-  name         = "reddit-app-${count.index}"
+  count = "${var.count_instance}"
+  name = "reddit-app-${count.index}"
   machine_type = "g1-small"
-  zone         = "${var.zone_instance}"
-  tags         = ["reddit-app"]
+  zone = "${var.zone_instance}"
+  tags = ["reddit-app"]
 
   # add image disk
   boot_disk {
@@ -45,19 +45,19 @@ resource "google_compute_instance" "app" {
 
   # add network
   network_interface {
-    network       = "default"
+    network = "default"
     access_config = {}
   }
   connection {
-    type  = "ssh"
-    user  = "root"
+    type = "ssh"
+    user = "root"
     agent = false
 
     private_key = "${file(var.private_key_path)}"
   }
   # add startup service
   provisioner "file" {
-    source      = "files/puma.service"
+    source = "files/puma.service"
     destination = "/tmp/puma.service"
   }
   # install app
@@ -74,9 +74,9 @@ resource "google_compute_firewall" "firewall_puma" {
 
   allow {
     protocol = "tcp"
-    ports    = ["9292"]
+    ports = ["9292"]
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["reddit-app"]
+  target_tags = ["reddit-app"]
 }

@@ -1,5 +1,5 @@
 project = "your_project_id"
-count_instance = "2"
-public_key_path = "~/.ssh/id_rsa.pub"
-private_key_path = "~/.ssh/id_rsa"
+count_instance = "1"
+public_key = ""
+private_key = ""
 disk_image = "reddit-base"

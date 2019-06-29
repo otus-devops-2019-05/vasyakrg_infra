@@ -20,7 +20,7 @@ variable public_key {
   description = "public key used for ssh access"
 }
 
-variable private {
+variable private_key {
   description = "private key used for ssh access"
 }
 

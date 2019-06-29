@@ -23,9 +23,9 @@ resource "google_compute_project_metadata" "ssh_keys" {
     # EOF
     #   }
     ssh-keys = <<EOF
-appuser:${var.public_key)}
-appuser1:${var.public_key)}
-appuser2:${var.public_key)}
+appuser:${var.public_key}
+appuser1:${var.public_key}
+appuser2:${var.public_key}
 EOF
   }
 }
@@ -59,7 +59,7 @@ resource "google_compute_instance" "app" {
     user  = "appuser"
     agent = false
 
-    private_key = "${var.private_key)}"
+    private_key = "${var.private_key}"
   }
   # add startup service
   provisioner "file" {

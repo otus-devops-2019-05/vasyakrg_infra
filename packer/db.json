@@ -1,0 +1,39 @@
+{
+    "variables":
+	{
+	    "project_id": null,
+	    "project_name": null,
+	    "source_image_family": null,
+	    "machine_type": "f1-micro",
+	    "disk_type": "pd-standard",
+	    "disk_size": "10",
+	    "network": "default",
+	    "default_user": "root",
+	    "image_description": "Tempalate with mongoDB on Ubuntu 16",
+      "tags": "puma-server"
+	},
+    "builders": [
+        {
+            "type": "googlecompute",
+            "project_id": "{{ user `project_id` }}",
+            "image_name": "reddit-mongodb-{{timestamp}}",
+            "image_family": "reddit-base",
+            "source_image_family": "{{ user `source_image_family` }}",
+            "zone": "europe-west1-b",
+            "network": "{{ user `network` }}",
+            "ssh_username": "{{ user `default_user` }}",
+            "machine_type": "{{ user `machine_type` }}",
+            "disk_type": "{{ user `disk_type` }}",
+            "disk_size": "{{user `disk_size`}}",
+            "image_description": "{{ user `image_description` }}",
+            "tags": "{{user `[tags]`}}"
+        }
+    ],
+        "provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/install_mongodb.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}

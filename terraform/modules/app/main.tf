@@ -3,8 +3,8 @@ resource "google_compute_address" "app_ip" {
 }
 
 resource "google_compute_instance" "app" {
-  count        = "${var.count_instance}"
-  name         = "reddit-app-${count.index}"
+  # count        = "${var.count_instance}"
+  name         = "reddit-app"
   machine_type = "g1-small"
   zone         = "${var.zone_instance}"
   tags         = ["reddit-app"]
@@ -26,6 +26,36 @@ resource "google_compute_instance" "app" {
       nat_ip = "${google_compute_address.app_ip.address}"
     }
   }
+
+  connection {
+    type  = "ssh"
+    user  = "appuser"
+    agent = false
+    host  = "${google_compute_address.app_ip.address}"
+
+    private_key = "${var.private_key}"
+  }
+
+  provisioner "file" {
+    source      = "../modules/app/files/puma.service"
+    destination = "/tmp/puma.service"
+  }
+
+  provisioner "file" {
+    source      = "../modules/app/files/deploy.sh"
+    destination = "/tmp/deploy.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "${var.install_app == true ? local.app-install : local.app-noninstall}",
+    ]
+  }
+}
+
+locals {
+  app-install    = "echo Environment='DATABASE_URL=${var.db_external_ip}:27017' >> '/tmp/puma.service' && sh /tmp/deploy.sh"
+  app-noninstall = "echo app-non-install"
 }
 
 resource "google_compute_firewall" "firewall_puma" {

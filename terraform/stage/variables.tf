@@ -35,9 +35,14 @@ variable app_disk_image {
 
 variable db_disk_image {
   description = "Disk image for reddit db"
-  default     = "reddit-mongodb-1562141184"
+  default     = "reddit-mongodb-1562174469"
 }
 
 variable "app_port" {
   default = "9292"
+}
+
+variable "access_range" {
+  type        = "list"
+  description = "Access range list to ssh port"
 }

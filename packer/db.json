@@ -31,6 +31,11 @@
     ],
         "provisioners": [
         {
+            "type": "file",
+            "source": "scripts/mongod.conf",
+            "destination": "/tmp/mongod.conf"
+        },
+        {
             "type": "shell",
             "script": "scripts/install_mongodb.sh",
             "execute_command": "sudo {{.Path}}"

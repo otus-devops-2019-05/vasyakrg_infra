@@ -15,3 +15,15 @@ variable "count_instance" {
 variable public_key {
   description = "public key used for ssh access"
 }
+
+variable private_key {
+  description = "private key used for ssh access"
+}
+
+variable "install_app" {
+  default = "true"
+}
+
+variable "db_external_ip" {
+  default = "127.0.0.1"
+}

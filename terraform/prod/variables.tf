@@ -41,3 +41,8 @@ variable db_disk_image {
 variable "app_port" {
   default = "9292"
 }
+
+variable "access_range" {
+  type        = "list"
+  description = "Access range list to ssh port"
+}

@@ -15,3 +15,7 @@ variable "count_instance" {
 variable public_key {
   description = "public key used for ssh access"
 }
+
+variable "external_ip_app" {
+  description = "external ip from app-server for open firewall to mongodb"
+}

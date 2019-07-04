@@ -1,6 +1,6 @@
 resource "google_compute_instance" "db" {
-  count        = "${var.count_instance}"
-  name         = "reddit-db-${count.index}"
+  # count        = "${var.count_instance}"
+  name         = "reddit-db"
   machine_type = "g1-small"
   zone         = "${var.zone_instance}"
   tags         = ["reddit-db"]
@@ -33,7 +33,7 @@ resource "google_compute_firewall" "firewall_mongo" {
     ports    = ["27017"]
   }
 
-  source_ranges = ["0.0.0.0/0"]
+  source_ranges = ["${var.external_ip_app}/32"]
   target_tags   = ["reddit-db"]
   source_tags   = ["reddit-app"]
 }

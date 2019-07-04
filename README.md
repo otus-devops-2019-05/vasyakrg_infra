@@ -59,15 +59,18 @@
       > ssh -A -J root@34.90.190.195 root@10.164.0.3
 #### Задание со звездочкой
     Для добавления алиса на рабочей машине и доступа на прямую в хост someinternalhost использую:
-        alias someinternalhost="ssh -A -J root@34.90.190.195 root@10.164.0.3"
+      > alias someinternalhost="ssh -A -J root@34.90.190.195 root@10.164.0.3"
+
     и соответственно получаю выполнение команды в один запрос:
-        someinternalhost
+      >  someinternalhost
+
     Если требуется, что бы алисы работали и после перезапуска терминала, то надо раскомментить настройки в вашем "~/.bashrc"
-        if [ -f ~/.bash_aliases ]; then
+      ```  if [ -f ~/.bash_aliases ]; then
         . ~/.bash_aliases
         fi
+      ```  
     А алисы добавлять по принципу:
-        echo "someinternalhost='sh -A -J root@34.90.190.195 root@10.164.0.3'" >> ~/.bash_aliases && source ~/.bash_aliases
+      >  echo "someinternalhost='sh -A -J root@34.90.190.195 root@10.164.0.3'" >> ~/.bash_aliases && source ~/.bash_aliases
 
 #### VPN сервер
     ##### параметры подключения:

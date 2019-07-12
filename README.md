@@ -1,5 +1,9 @@
 # vasyakrg_infra
-[![Build Status](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra.svg?branch=terraform-2)](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra)
+[![Build Status](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra.svg?branch=ansible-1)](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra)
+
+## HW8
+  *
+
 ## HW7
   * Скрипт поднимает два инстанса:
     - один для mondoDB (берется из образа, в образе измененная конфигурация - порт 27017 открыт на всех интерфейсах)

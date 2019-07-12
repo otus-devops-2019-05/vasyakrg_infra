@@ -46,3 +46,8 @@ variable "access_range" {
   type        = "list"
   description = "Access range list to ssh port"
 }
+
+variable "group_vm" {
+  type    = "list"
+  default = ["app", "db"]
+}

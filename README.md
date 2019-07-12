@@ -2,7 +2,10 @@
 [![Build Status](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra.svg?branch=ansible-1)](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra)
 
 ## HW8
-  *
+  * в прогоне простого плейбука и при выполнения
+    > ansible app -m command -a 'rm -rf ~/reddit'
+
+    - изменяется флаг "changed", т.к плейбуку приходится снова создавать директору и клонировать туда репу
 
 ## HW7
   * Скрипт поднимает два инстанса:

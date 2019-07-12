@@ -1,6 +1,6 @@
 resource "local_file" "inventory" {
   content  = "${data.template_file.inventory.rendered}"
-  filename = "../../ansible/inventory-prod"
+  filename = "../../ansible/inventory-prod.json"
 }
 
 data "template_file" "inventory" {

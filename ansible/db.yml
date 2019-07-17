@@ -1,5 +1,5 @@
 ---
-- name: Configure hosts & deploy application
+- name: Configure MongoDB
   hosts: db
   become: true
   vars:
@@ -10,9 +10,10 @@
         src: templates/mongod.conf.j2
         dest: /etc/mongod.conf
         mode: 0644
-      tags: db-tag
       notify: restart mongod
 
   handlers:
   - name: restart mongod
-    service: name=mongod state=restarted
+    service:
+      name: mongod
+      state: restarted

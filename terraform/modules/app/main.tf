@@ -46,11 +46,11 @@ resource "google_compute_instance" "app" {
     destination = "/tmp/deploy.sh"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "${var.install_app == true ? local.app-install : local.app-noninstall}",
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "${var.install_app == true ? local.app-install : local.app-noninstall}",
+  #   ]
+  # }
 }
 
 locals {

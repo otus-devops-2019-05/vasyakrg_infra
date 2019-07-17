@@ -24,6 +24,6 @@ variable "install_app" {
   default = "true"
 }
 
-variable "db_external_ip" {
+variable "db_internal_ip" {
   default = "127.0.0.1"
 }

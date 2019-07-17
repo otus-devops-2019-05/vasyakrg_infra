@@ -3,8 +3,13 @@
   hosts: app
   become: true
   vars:
-   db_host: 34.76.14.213
+    db_host: "{{ hostvars['dbserver']['ansible_facts']['all_ipv4_addresses'] | join('\n') }}"
   tasks:
+    - name: Print facts
+      debug:
+        var: db_host
+      tags: db_host
+
     - name: Add unit file for Puma
       copy:
         src: files/puma.service
@@ -17,6 +22,7 @@
         dest: /home/appuser/db_config
         owner: appuser
         group: appuser
+      tags: db_host
 
     - name: enable puma
       systemd:

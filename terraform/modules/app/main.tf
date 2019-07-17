@@ -42,39 +42,24 @@ resource "google_compute_instance" "app" {
     private_key = "${var.private_key}"
   }
 
-  # provisioner "file" {
-  #   source      = "../modules/app/files/puma.service"
-  #   destination = "/tmp/puma.service"
-  # }
-  #
-  # provisioner "file" {
-  #   source      = "../modules/app/files/deploy.sh"
-  #   destination = "/tmp/deploy.sh"
-  # }
-
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "${var.install_app == true ? local.app-install : local.app-noninstall}",
-  #   ]
-  # }
-}
-
-# locals {
-#   app-install    = "echo Environment='DATABASE_URL=${var.db_external_ip}:27017' >> '/tmp/puma.service' && sh /tmp/deploy.sh"
-#   app-noninstall = "echo app-non-install"
-# }
-
-resource "google_compute_firewall" "firewall_puma" {
-  name = "allow-puma-default"
-
-  # name of net
-  network = "default"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["9292"]
+  provisioner "file" {
+    source      = "../modules/app/files/puma.service"
+    destination = "/tmp/puma.service"
   }
 
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["reddit-app"]
+  provisioner "file" {
+    source      = "../modules/app/files/deploy.sh"
+    destination = "/tmp/deploy.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "${var.install_app == true ? local.app-install : local.app-noninstall}",
+    ]
+  }
+}
+
+locals {
+  app-install    = "echo Environment='DATABASE_URL=${var.db_internal_ip}:27017' >> '/tmp/puma.service' && sh /tmp/deploy.sh"
+  app-noninstall = "echo app-non-install"
 }

@@ -1,6 +1,6 @@
-variable db_disk_image {
+variable db_disk_image_family {
   description = "Disk image for reddit db"
-  default     = "reddit-mongodb-1562141184"
+  default     = "reddit-base-db"
 }
 
 variable "zone_instance" {

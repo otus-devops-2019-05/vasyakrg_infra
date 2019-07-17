@@ -1,5 +1,12 @@
 # vasyakrg_infra
-[![Build Status](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra.svg?branch=ansible-1)](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra)
+[![Build Status](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra.svg?branch=ansible-2)](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra)
+
+## HW9
+  * packer теперь работает с образами через ansible (устанавливая все что необходимо)
+  * terraform через свой output выдает данные для последующего использования в динамическом инвентори
+  * ansible настраивает через плейбук обе виртуалки, передавая необходимые настройки в app и в db, а так же производит деплой приложения
+  * как результат имеем полностью настроенное и рабочее приложение
+
 
 ## HW8
   * в прогоне простого плейбука и при выполнения

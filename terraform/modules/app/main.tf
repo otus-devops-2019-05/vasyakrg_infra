@@ -15,7 +15,7 @@ resource "google_compute_instance" "app" {
 
   boot_disk {
     initialize_params {
-      image = "${var.app_disk_image}"
+      family = "${var.app_disk_image_family}"
     }
   }
 
@@ -36,15 +36,15 @@ resource "google_compute_instance" "app" {
     private_key = "${var.private_key}"
   }
 
-  provisioner "file" {
-    source      = "../modules/app/files/puma.service"
-    destination = "/tmp/puma.service"
-  }
-
-  provisioner "file" {
-    source      = "../modules/app/files/deploy.sh"
-    destination = "/tmp/deploy.sh"
-  }
+  # provisioner "file" {
+  #   source      = "../modules/app/files/puma.service"
+  #   destination = "/tmp/puma.service"
+  # }
+  #
+  # provisioner "file" {
+  #   source      = "../modules/app/files/deploy.sh"
+  #   destination = "/tmp/deploy.sh"
+  # }
 
   # provisioner "remote-exec" {
   #   inline = [
@@ -53,10 +53,10 @@ resource "google_compute_instance" "app" {
   # }
 }
 
-locals {
-  app-install    = "echo Environment='DATABASE_URL=${var.db_external_ip}:27017' >> '/tmp/puma.service' && sh /tmp/deploy.sh"
-  app-noninstall = "echo app-non-install"
-}
+# locals {
+#   app-install    = "echo Environment='DATABASE_URL=${var.db_external_ip}:27017' >> '/tmp/puma.service' && sh /tmp/deploy.sh"
+#   app-noninstall = "echo app-non-install"
+# }
 
 resource "google_compute_firewall" "firewall_puma" {
   name = "allow-puma-default"

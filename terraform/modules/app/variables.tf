@@ -1,6 +1,6 @@
-variable app_disk_image {
+variable app_disk_image_family {
   description = "Disk image for reddit app"
-  default     = "reddit-ruby-1562141405"
+  default     = "reddit-base-app"
 }
 
 variable "zone_instance" {

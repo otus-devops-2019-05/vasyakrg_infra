@@ -28,14 +28,14 @@ variable disk_image {
   description = "Disk image"
 }
 
-variable app_disk_image {
+variable app_disk_image_family {
   description = "Disk image for reddit app"
-  default     = "reddit-ruby-1562141405"
+  default     = "reddit-base-app"
 }
 
-variable db_disk_image {
+variable db_disk_image_family {
   description = "Disk image for reddit db"
-  default     = "reddit-mongodb-1562174469"
+  default     = "reddit-base-db"
 }
 
 variable "app_port" {

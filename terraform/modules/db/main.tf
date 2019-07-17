@@ -11,7 +11,7 @@ resource "google_compute_instance" "db" {
 
   boot_disk {
     initialize_params {
-      image = "${var.db_disk_image}"
+      family = "${var.db_disk_image_family}"
     }
   }
 

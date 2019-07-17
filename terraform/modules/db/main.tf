@@ -1,3 +1,9 @@
+data "google_compute_image" "image" {
+  family = "${var.db_disk_image_family}"
+
+  # project = "debian-cloud"
+}
+
 resource "google_compute_instance" "db" {
   # count        = "${var.count_instance}"
   name         = "reddit-db"
@@ -11,7 +17,7 @@ resource "google_compute_instance" "db" {
 
   boot_disk {
     initialize_params {
-      family = "${var.db_disk_image_family}"
+      image = "${data.google_compute_image.image.name}"
     }
   }
 

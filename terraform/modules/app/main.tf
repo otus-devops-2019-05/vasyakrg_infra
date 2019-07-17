@@ -2,6 +2,12 @@ resource "google_compute_address" "app_ip" {
   name = "reddit-app-ip"
 }
 
+data "google_compute_image" "image" {
+  family = "${var.app_disk_image_family}"
+
+  # project = "debian-cloud"
+}
+
 resource "google_compute_instance" "app" {
   # count        = "${var.count_instance}"
   name         = "reddit-app"
@@ -15,7 +21,7 @@ resource "google_compute_instance" "app" {
 
   boot_disk {
     initialize_params {
-      family = "${var.app_disk_image_family}"
+      image = "${data.google_compute_image.image.name}"
     }
   }
 

@@ -7,5 +7,5 @@ output "external_db_ip" {
 }
 
 output "inventory" {
-  value = "${template_file.inventory.rendered}"
+  value = "${data.template_file.inventory.rendered}"
 }

@@ -17,7 +17,7 @@ module "app" {
   public_key            = "${var.public_key}"
   private_key           = "${var.private_key}"
   zone_instance         = "${var.zone_instance}"
-  app_disk_image_family = "${var.app_disk_image}"
+  app_disk_image_family = "${var.app_disk_image_family}"
   db_external_ip        = "${module.db.db_external_ip}"
   install_app           = "true"
 
@@ -28,7 +28,7 @@ module "db" {
   source               = "../modules/db"
   public_key           = "${var.public_key}"
   zone_instance        = "${var.zone_instance}"
-  db_disk_image_family = "${var.db_disk_image}"
+  db_disk_image_family = "${var.db_disk_image_family}"
   external_ip_app      = "${module.app.app_external_ip}"
 }
 

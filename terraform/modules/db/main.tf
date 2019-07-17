@@ -1,3 +1,9 @@
+data "google_compute_image" "image" {
+  family = "${var.db_disk_image_family}"
+
+  # project = "debian-cloud"
+}
+
 resource "google_compute_instance" "db" {
   # count        = "${var.count_instance}"
   name         = "reddit-db"
@@ -11,7 +17,7 @@ resource "google_compute_instance" "db" {
 
   boot_disk {
     initialize_params {
-      image = "${var.db_disk_image}"
+      image = "${data.google_compute_image.image.name}"
     }
   }
 
@@ -20,20 +26,4 @@ resource "google_compute_instance" "db" {
 
     access_config = {}
   }
-}
-
-resource "google_compute_firewall" "firewall_mongo" {
-  name = "allow-mongo-default"
-
-  # name of net
-  network = "default"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["27017"]
-  }
-
-  source_ranges = ["${var.external_ip_app}/32"]
-  target_tags   = ["reddit-db"]
-  source_tags   = ["reddit-app"]
 }

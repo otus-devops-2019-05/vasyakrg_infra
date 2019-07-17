@@ -1,6 +1,6 @@
-variable app_disk_image {
+variable app_disk_image_family {
   description = "Disk image for reddit app"
-  default     = "reddit-ruby-1562141405"
+  default     = "reddit-base-app"
 }
 
 variable "zone_instance" {
@@ -24,6 +24,6 @@ variable "install_app" {
   default = "true"
 }
 
-variable "db_external_ip" {
+variable "db_internal_ip" {
   default = "127.0.0.1"
 }

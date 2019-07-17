@@ -1,6 +1,6 @@
-variable db_disk_image {
+variable db_disk_image_family {
   description = "Disk image for reddit db"
-  default     = "reddit-mongodb-1562141184"
+  default     = "reddit-base-db"
 }
 
 variable "zone_instance" {
@@ -14,8 +14,4 @@ variable "count_instance" {
 
 variable public_key {
   description = "public key used for ssh access"
-}
-
-variable "external_ip_app" {
-  description = "external ip from app-server for open firewall to mongodb"
 }

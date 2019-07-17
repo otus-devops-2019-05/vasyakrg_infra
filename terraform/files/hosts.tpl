@@ -10,9 +10,9 @@
 }
 },
   "app": {
-    "hosts": ["${app_address}"]
+    "hosts": ["appserver"]
   },
   "db": {
-    "hosts": ["${db_address}"]
+    "hosts": ["dbserver"]
   }
 }

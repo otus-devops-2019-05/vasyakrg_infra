@@ -2,6 +2,12 @@ resource "google_compute_address" "app_ip" {
   name = "reddit-app-ip"
 }
 
+data "google_compute_image" "image" {
+  family = "${var.app_disk_image_family}"
+
+  # project = "debian-cloud"
+}
+
 resource "google_compute_instance" "app" {
   # count        = "${var.count_instance}"
   name         = "reddit-app"
@@ -15,7 +21,7 @@ resource "google_compute_instance" "app" {
 
   boot_disk {
     initialize_params {
-      image = "${var.app_disk_image}"
+      image = "${data.google_compute_image.image.name}"
     }
   }
 
@@ -54,21 +60,6 @@ resource "google_compute_instance" "app" {
 }
 
 locals {
-  app-install    = "echo Environment='DATABASE_URL=${var.db_external_ip}:27017' >> '/tmp/puma.service' && sh /tmp/deploy.sh"
+  app-install    = "echo Environment='DATABASE_URL=${var.db_internal_ip}:27017' >> '/tmp/puma.service' && sh /tmp/deploy.sh"
   app-noninstall = "echo app-non-install"
-}
-
-resource "google_compute_firewall" "firewall_puma" {
-  name = "allow-puma-default"
-
-  # name of net
-  network = "default"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["9292"]
-  }
-
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["reddit-app"]
 }

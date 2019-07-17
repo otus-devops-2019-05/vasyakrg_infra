@@ -5,3 +5,7 @@ output "external_app_ip" {
 output "external_db_ip" {
   value = "${module.db.db_external_ip}"
 }
+
+output "inventory" {
+  value = "${data.template_file.inventory.rendered}"
+}

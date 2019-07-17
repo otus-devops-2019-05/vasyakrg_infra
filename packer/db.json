@@ -9,15 +9,14 @@
 	    "disk_size": "10",
 	    "network": "default",
 	    "default_user": "root",
-	    "image_description": "Tempalate with mongoDB on Ubuntu 16",
-      "tags": "puma-server"
+	    "image_description": "Tempalate with mongoDB on Ubuntu 16"
 	},
     "builders": [
         {
             "type": "googlecompute",
             "project_id": "{{ user `project_id` }}",
             "image_name": "reddit-mongodb-{{timestamp}}",
-            "image_family": "reddit-base",
+            "image_family": "reddit-base-db",
             "source_image_family": "{{ user `source_image_family` }}",
             "zone": "europe-west1-b",
             "network": "{{ user `network` }}",
@@ -26,19 +25,13 @@
             "disk_type": "{{ user `disk_type` }}",
             "disk_size": "{{user `disk_size`}}",
             "image_description": "{{ user `image_description` }}",
-            "tags": "{{user `[tags]`}}"
+            "tags": ["puma-server"]
         }
     ],
         "provisioners": [
         {
-            "type": "file",
-            "source": "scripts/mongod.conf",
-            "destination": "/tmp/mongod.conf"
-        },
-        {
-            "type": "shell",
-            "script": "scripts/install_mongodb.sh",
-            "execute_command": "sudo {{.Path}}"
+            "type": "ansible",
+            "playbook_file": "ansible/packer_db.yml"
         }
     ]
 }

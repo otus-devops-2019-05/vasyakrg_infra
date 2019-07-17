@@ -1,8 +1,3 @@
-resource "local_file" "inventory" {
-  content  = "${data.template_file.inventory.rendered}"
-  filename = "../../ansible/inventory-stage.json"
-}
-
 data "template_file" "inventory" {
   template = "${file("../files/hosts.tpl")}"
 

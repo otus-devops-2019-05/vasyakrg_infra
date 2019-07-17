@@ -13,26 +13,32 @@ provider "google" {
 }
 
 module "app" {
-  source         = "../modules/app"
-  public_key     = "${var.public_key}"
-  private_key    = "${var.private_key}"
-  zone_instance  = "${var.zone_instance}"
-  app_disk_image = "${var.app_disk_image_family}"
-  db_external_ip = "${module.db.db_external_ip}"
-  install_app    = "true"
+  source                = "../modules/app"
+  public_key            = "${var.public_key}"
+  private_key           = "${var.private_key}"
+  zone_instance         = "${var.zone_instance}"
+  app_disk_image_family = "${var.app_disk_image_family}"
+  db_internal_ip        = "${module.db.db_internal_ip}"
 
-  # depends_on     = [module.db]
+  install_app = "false"
 }
 
 module "db" {
-  source          = "../modules/db"
-  public_key      = "${var.public_key}"
-  zone_instance   = "${var.zone_instance}"
-  db_disk_image   = "${var.db_disk_image_family}"
-  external_ip_app = "${module.app.app_external_ip}"
+  source               = "../modules/db"
+  public_key           = "${var.public_key}"
+  zone_instance        = "${var.zone_instance}"
+  db_disk_image_family = "${var.db_disk_image_family}"
 }
 
 module "vpc" {
   source        = "../modules/vpc"
   source_ranges = ["${var.access_range}"]
+}
+
+module "dns" {
+  source        = "../modules/dns"
+  dns_zone_id   = "env-dns"
+  dns_zone_name = "aits.life"
+  record_name   = "app1"
+  record_ip     = "${module.app.app_external_ip}"
 }

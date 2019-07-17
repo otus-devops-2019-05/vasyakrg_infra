@@ -34,3 +34,11 @@ module "vpc" {
   source        = "../modules/vpc"
   source_ranges = ["${var.access_range}"]
 }
+
+module "dns" {
+  source        = "../modules/dns"
+  dns_zone_id   = "env-dns"
+  dns_zone_name = "aits.life"
+  record_name   = "app1"
+  record_ip     = "${module.app.app_external_ip}"
+}

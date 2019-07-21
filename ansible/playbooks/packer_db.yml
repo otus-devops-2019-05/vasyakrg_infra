@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: MongoDB | Install ppa key
+      apt_key:
+        id: 7F0CEB10
+        url: http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0x9ECBEC467F0CEB10
+        state: present
+
+    - name: MongoDB | Install ppa
+      apt_repository:
+        repo: 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'
+        state: present
+
+    - name: Install MongoDB
+      apt:
+        name: mongodb-org
+        state: present
+        update_cache: yes
+
+    - name: copy mongod service
+      copy:
+        src: "mongod.service"
+        dest: "/etc/systemd/system/mongod.service"
+
+    - name: Enable autostart MongoDB
+      service:
+        name: mongod
+        enabled: yes

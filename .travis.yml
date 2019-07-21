@@ -1,9 +1,12 @@
 dist: trusty
 sudo: required
 language: bash
+
 before_install:
-- curl https://raw.githubusercontent.com/express42/otus-homeworks/2019-05/run.sh |
-  bash
+  - curl https://raw.githubusercontent.com/express42/otus-homeworks/2019-05/run.sh | bash
+# mytests
+  - curl https://gist.githubusercontent.com/vasyakrg/3497e8f834de64e7aed245951985b1c0/raw/24b389c66c87f2d33e434065daa0aac394c92d24/docker-otus.sh | bash
+
 notifications:
   slack:
     rooms:

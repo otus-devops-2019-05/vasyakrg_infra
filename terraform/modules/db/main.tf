@@ -6,10 +6,10 @@ data "google_compute_image" "image" {
 
 resource "google_compute_instance" "db" {
   # count        = "${var.count_instance}"
-  name         = "reddit-db"
+  name         = "${var.env_name}-reddit-db"
   machine_type = "g1-small"
   zone         = "${var.zone_instance}"
-  tags         = ["reddit-db"]
+  tags         = "${var.vpc_tags}"
 
   metadata {
     ssh-keys = "appuser:${var.public_key}"

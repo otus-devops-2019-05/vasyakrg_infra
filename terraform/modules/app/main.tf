@@ -1,6 +1,6 @@
-resource "google_compute_address" "app_ip" {
-  name = "reddit-app-ip"
-}
+# resource "google_compute_address" "app_ip" {
+#   name = "${var.env_name}-reddit-app-ip"
+# }
 
 data "google_compute_image" "image" {
   family = "${var.app_disk_image_family}"
@@ -10,10 +10,10 @@ data "google_compute_image" "image" {
 
 resource "google_compute_instance" "app" {
   # count        = "${var.count_instance}"
-  name         = "reddit-app"
+  name         = "${var.env_name}-reddit-app"
   machine_type = "g1-small"
   zone         = "${var.zone_instance}"
-  tags         = ["reddit-app"]
+  tags         = "${var.vpc_tags}"
 
   metadata {
     ssh-keys = "appuser:${var.public_key}"
@@ -29,7 +29,7 @@ resource "google_compute_instance" "app" {
     network = "default"
 
     access_config = {
-      nat_ip = "${google_compute_address.app_ip.address}"
+      # nat_ip = "${google_compute_address.app_ip.address}"
     }
   }
 
@@ -37,7 +37,7 @@ resource "google_compute_instance" "app" {
     type  = "ssh"
     user  = "appuser"
     agent = false
-    host  = "${google_compute_address.app_ip.address}"
+    host  = "${self.network_interface.0.access_config.0.nat_ip}"
 
     private_key = "${var.private_key}"
   }

@@ -1,5 +1,5 @@
 resource "google_compute_firewall" "firewall_puma" {
-  name = "allow-puma-default"
+  name = "${var.env_name}-allow-puma-default"
 
   # name of net
   network = "default"
@@ -10,5 +10,5 @@ resource "google_compute_firewall" "firewall_puma" {
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["reddit-app"]
+  target_tags   = "${var.vpc_tags}"
 }

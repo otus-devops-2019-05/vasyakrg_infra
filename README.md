@@ -1,5 +1,11 @@
 # vasyakrg_infra
-[![Build Status](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra.svg?branch=ansible-2)](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra)
+[![Build Status](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra.svg?branch=ansible-3)](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra)
+
+## HW10
+  * теперь окружения поднимаются одновременно и независимо друг от друга (это реализовано как в terraform, так и в ansible)
+  * теперь ansible работает через роли и устанвливает их используя динамический инвентори (получаемый с вывода от terraform)
+  * добавлена роль проксирующего nginx на stage окружении, что бы приложение было доступно по 80-му порту
+  * в terraform так же реализовано открытие необходимых портов через переменную в нужном нам окружении
 
 ## HW9
   * packer теперь работает с образами через ansible (устанавливая все что необходимо)

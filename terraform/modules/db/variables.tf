@@ -15,3 +15,12 @@ variable "count_instance" {
 variable public_key {
   description = "public key used for ssh access"
 }
+
+variable "vpc_tags" {
+  type    = "list"
+  default = []
+}
+
+variable "env_name" {
+  default = ""
+}

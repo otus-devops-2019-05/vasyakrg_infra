@@ -3,3 +3,4 @@
 
 - src: https://github.com/vasyakrg/roles-db
   name: db
+  tag: v0.1

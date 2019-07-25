@@ -1,7 +1,9 @@
-Role Name
+[![Build Status](https://travis-ci.com/vasyakrg/roles-db.svg?branch=master)](https://travis-ci.com/vasyakrg/roles-db)
+
+vasyakrg.DB
 =========
 
-A brief description of the role goes here.
+This rols deploy mongoDB
 
 Requirements
 ------------
@@ -25,7 +27,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: vasyakrg.db }
 
 License
 -------
@@ -35,4 +37,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+- **Vassiliy Yegorov** - *Initial work* - [vasyakrg](https://github.com/vasyakrg)

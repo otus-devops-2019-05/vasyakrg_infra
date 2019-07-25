@@ -2,16 +2,19 @@
 dependency:
   name: galaxy
 driver:
-  name: vagrant
-  provider:
-    name: virtualbox
+  name: gce
 lint:
   name: yamllint
 platforms:
-  - name: instance
-    box: ubuntu/xenial64
+  - name: travisdb
+    box: ubuntu-1604-xenial
+    machine_type: f1-micro
+    zone: europe-west1-b
+    tags: puma-server
 provisioner:
   name: ansible
+  options:
+    vvv: false
   lint:
     name: ansible-lint
 verifier:

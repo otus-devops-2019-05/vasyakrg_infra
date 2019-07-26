@@ -1,6 +1,10 @@
 # vasyakrg_infra
 [![Build Status](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra.svg?branch=ansible-3)](https://travis-ci.com/otus-devops-2019-05/vasyakrg_infra)
 
+## HW11
+  * подключены тесты molecule с драйвером vagtant (vitrual-box)
+  * роль DB обрела свой покой в отдельной репе и теперь подтягивается как зависимость с нужным тегом
+
 ## HW10
   * теперь окружения поднимаются одновременно и независимо друг от друга (это реализовано как в terraform, так и в ansible)
   * теперь ansible работает через роли и устанвливает их используя динамический инвентори (получаемый с вывода от terraform)
